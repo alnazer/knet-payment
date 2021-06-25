@@ -157,8 +157,6 @@ class Knet
                 $result['ref'] = $ResRef;
                 $result['result'] = "error";
                 $result['data']= http_build_query($_REQUEST);
-                $result['ErrorText']= $ResErrorText;
-                $result['Error'] = $ResErrorNo;
                 $result['postdate'] = $ResPosdate;
                 $result['auth'] = $ResAuth;
                 $result['avr'] = $ResAVR;
@@ -168,6 +166,8 @@ class Knet
                 $result['udf3'] = $Resudf3;
                 $result['udf4'] = $Resudf4;
                 $result['udf5'] = $Resudf5;
+                $result['ErrorText']= $ResErrorText;
+                $result['Error'] = $ResErrorNo;
             }
 
             //call after Responce event
