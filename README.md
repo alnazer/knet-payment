@@ -12,6 +12,45 @@ CVC : Any 4 digit
 ## usage
 ```php
 use Payments\KnetPayment\Knet;
+
+$config = [
+    "tranportal_id"=>"",
+    "password"=>"",
+    "resource_key"=>"",
+    "response_url" => "https://yourdomain.com/result.php"
+    "error_url" => "https://yourdomain.com/error.php"
+    "amount=> 1,
+    "udf1=> "",
+    "udf2=> "",
+    "udf3=> "",
+    "udf4=> "",
+    "udf5=> "",
+]
+$knet  = new Knet($config);
+
+// **************  request from knet *************//
+$request = $knet->request();
+
+if($request["status"] == 1)
+{
+    // redirect to knet payment page using $request["data"]["url"];
+}
+else
+{
+    // display errors print_r($request["errors"]);
+}
+
+// ************** back from knet  *************//
+
+$resutl = $knet->responce();
+
+if($resutl["status"] == "success"){
+    // get reult and update your database
+}
+else
+{
+    // print error $resutl["ErrorText"]
+}
 ```
 ### require information
 get this information knet account
@@ -205,8 +244,8 @@ public function afterResponce($payment_id, $trackid, $result)
   "udf3" => "",// you set this data in request function
   "udf4" => "",// you set this data in request function
   "udf5" => "",// you set this data in request function
-  "ErrorText" => "",
-  "Error" => "",
+  "ErrorText" => "get from knet responce",
+  "Error" => "get from knet responce",
 ]
 ```
 
