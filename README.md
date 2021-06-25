@@ -1,15 +1,28 @@
 # knet-payment
 
 
+to test payment choose KNET from banks list
+```text
+Card Number : 8888880000000001
+Expiry Date : 09/21  for Captured or add current Year 09/Y
+Expiry Date : Any  for Not Captured
+CVC : Any 4 digit
+```
 
 ## usage
-
+```php
+use Payments\KnetPayment\Knet;
+```
 ### require information
 get this information knet account
 ```php
 $tranportal_id;
 $password;
 $resource_key;
+```
+if you want test payment
+```php
+$is_test = true;
 ```
 ### return urls
 ```php
