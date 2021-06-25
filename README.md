@@ -182,7 +182,7 @@ public function afterResponce($payment_id, $trackid, $result)
   "trackid" => "3424234234",
   "tranid" => "4234234234234",
   "ref" => "3523235252",
-  "result" => "error", //knet result CAPTURED,NOT CAPTURED,CANCELED ... ect
+  "result" => "error",
   "postdate" => "3234234",
   "auth" => "44445",
   "avr" => "4566",
