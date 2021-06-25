@@ -11,6 +11,7 @@ class Knet
     public $erros = array();
     public $is_test = false;
     public $amount;
+    public $tranportal_id = "";
     public $password = "";
     public $resource_key = "";
     public $udf1 = "";
