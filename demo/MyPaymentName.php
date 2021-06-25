@@ -40,12 +40,18 @@ class MyPaymentName extends \Payments\KnetPayment\Knet
     public function beforeValidate()
     {
         parent::beforeValidate();
+
+        //code here ....
+
         return true;
     }
     // add your afterValidate
     public function afterValidate()
     {
         parent::afterValidate();
+
+        //code here ....
+
         return true;
     } 
 
@@ -53,12 +59,18 @@ class MyPaymentName extends \Payments\KnetPayment\Knet
     protected function beforeRequest()
     {
         parent::beforeRequest();
+
+        //code here ....
+
     }
 
     // add your afterRequest event
     public function afterRequest($trak_id, $pay_url)
     {
         parent::afterRequest($trak_id, $pay_url);
+
+        //code here ....
+
         return true;
     }
 
@@ -66,6 +78,9 @@ class MyPaymentName extends \Payments\KnetPayment\Knet
     public function beforeResponce()
     {
         parent::beforeResponce();
+
+        //code here ....
+
         return true;
     } 
     // add your afterResponce
