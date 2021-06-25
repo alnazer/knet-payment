@@ -1,6 +1,21 @@
 # knet-payment
 
+
+
 ## usage
+
+### require information
+get this information knet account
+```php
+$tranportal_id;
+$password;
+$resource_key;
+```
+### return urls
+```php
+$response_url; // url bank will return after payment operation success
+$error_url;// url bank will return if faveing error in payment operation
+```
 
 ### call request using function
 ```php
@@ -49,6 +64,7 @@ public function afterValidate()
 ```
 
 #### before request
+called before call knet url 
 ```php
 public function beforeRequest()
 {
@@ -61,6 +77,7 @@ public function beforeRequest()
 ```
 
 #### after request
+called after call knet url 
 ```php
 public function afterRequest($trak_id, $pay_url)
 {
