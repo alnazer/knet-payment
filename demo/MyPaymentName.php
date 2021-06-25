@@ -87,6 +87,9 @@ class MyPaymentName extends \Payments\KnetPayment\Knet
     public function afterResponce($payment_id, $trackid, $result)
     {
         parent::afterResponce($payment_id, $trackid, $result);
+        
+        //code here ....
+
         return true;
     }
 
