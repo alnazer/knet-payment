@@ -136,9 +136,9 @@ public function beforeRequest()
 #### after request
 called after call knet url 
 ```php
-public function afterRequest($trak_id, $pay_url)
+public function afterRequest($trackid, $pay_url)
 {
-    parent::afterRequest($trak_id, $pay_url);
+    parent::afterRequest($trackid, $pay_url);
 
     //code here ....
 
