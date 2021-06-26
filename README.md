@@ -4,8 +4,11 @@
 to test payment choose KNET from banks list
 ```text
 Card Number : 8888880000000001
-Expiry Date : 09/21  for Captured or add current Year 09/Y
-Expiry Date : Any  for Not Captured
+for Captured 
+Expiry Date : 09/21  or add current Year 09/current Year
+
+for Not Captured
+Expiry Date : Any  
 CVC : Any 4 digit
 ```
 
