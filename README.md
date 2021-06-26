@@ -89,7 +89,7 @@ $this->validate();
 
 ### to add error
 ```php
-$this->addError("index_name,"message");
+$this->addError("index_name","message");
 ```
 ## Eventes
 
