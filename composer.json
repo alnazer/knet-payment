@@ -1,7 +1,7 @@
 {
   "name": "alnazer/knet-payment",
   "description": "We help you to develop your business by introducing the new add-on For payment through the K-Net portal, after it has been updated Expand your customers' circle by making the payment available via Knet",
-  "version": "1.0.0"
+  "version": "1.0.0",
   "license": "Apache-2.0",
   "keywords": ["knet", "payment", "kuwait"],
   "authors": [
