@@ -13,6 +13,6 @@
     "php": ">=7.4"
   },
   "autoload": {
-    "psr-4": {"Alnazer\\Payment\\KnetPayment\\": "src/"}
+    "psr-4": {"Alnazer\\KnetPayment\\": "src/"}
   }
 }
