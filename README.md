@@ -16,7 +16,7 @@ CVC : Any 4 digit
 
 ## usage
 ```php
-use Payments\KnetPayment\Knet;
+use Payment\KnetPayment\Knet;
 
 $config = [
     "tranportal_id"=>"",
