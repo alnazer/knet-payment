@@ -1,5 +1,5 @@
 <?php
-use Payment\KnetPayment\Knet;
+use Alnazer\Payment\KnetPayment\Knet;
 
 class MyPaymentName extends Knet
 {
