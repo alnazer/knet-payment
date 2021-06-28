@@ -1,5 +1,7 @@
 <?php
-class MyPaymentName extends \Payment\KnetPayment\Knet
+use Payment\KnetPayment\Knet;
+
+class MyPaymentName extends Knet
 {
     /**
      * if you want add error just add function 
