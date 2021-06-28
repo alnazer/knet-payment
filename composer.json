@@ -1,6 +1,6 @@
 {
-  "name": "payments/knet-payment",
-  "description": "description",
+  "name": "payment/knet-payment",
+  "description": "We help you to develop your business by introducing the new add-on For payment through the K-Net portal, after it has been updated Expand your customers' circle by making the payment available via Knet",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
@@ -13,6 +13,6 @@
     "php": ">=7.4"
   },
   "autoload": {
-    "psr-4": {"Payments\\KnetPayment\\": "src/"}
+    "psr-4": {"Payment\\KnetPayment\\": "src/"}
   }
 }
