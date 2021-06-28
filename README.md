@@ -1,7 +1,7 @@
 # knet-payment
 
 
-to test payment choose KNET from banks list
+to test payment choose KNET from banks list (بنك اختبار كنيت [KNET1])
 ```text
 Card Number : 8888880000000001
 
