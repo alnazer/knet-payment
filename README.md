@@ -15,7 +15,7 @@ CVC : Any 4 digit
 ```
 ## Installation
 ```composer
-composer require alnazer/knet-payment:1.0.0
+composer require alnazer/knet-payment
 ```
 
 ## usage
