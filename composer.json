@@ -1,8 +1,8 @@
 {
   "name": "alnazer/knet-payment",
   "description": "We help you to develop your business by introducing the new add-on For payment through the K-Net portal, after it has been updated Expand your customers' circle by making the payment available via Knet",
-  "version": "1.0.0",
-  "license": "Apache-2.0",
+  "license": "GPL-2.0-only",
+  "type": "library",
   "keywords": ["knet", "payment", "kuwait"],
   "authors": [
     {
@@ -10,8 +10,12 @@
       "email": "hassanaliksa@gmail.com"
     }
   ],
+	"support": {
+		"issues": "https://github.com/alnazer/knet-payment/issues",
+		"source": "https://github.com/alnazer/knet-payment",
+	},
   "require": {
-    "php": ">=7.4"
+    "php": "^5.6 || ^7.0 || ~8.0.0",
   },
   "autoload": {
     "psr-4": {"Alnazer\\KnetPayment\\": "src/"}
