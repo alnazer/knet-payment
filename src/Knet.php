@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Payment\KnetPayment;
+namespace Alnazer\Payment\KnetPayment;
 
 
 class Knet
