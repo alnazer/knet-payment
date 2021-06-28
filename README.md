@@ -26,15 +26,16 @@ $config = [
     "tranportal_id"=>"",
     "password"=>"",
     "resource_key"=>"",
-    "response_url" => "https://yourdomain.com/result.php"
-    "error_url" => "https://yourdomain.com/error.php"
+    "response_url" => "https://yourdomain.com/result.php",
+    "error_url" => "https://yourdomain.com/error.php",
     "amount"=> 1,
     "udf1"=> "",
     "udf2"=> "",
     "udf3"=> "",
     "udf4"=> "",
     "udf5"=> "",
-]
+];
+
 $knet  = new Knet($config);
 
 // **************  request from knet *************//
