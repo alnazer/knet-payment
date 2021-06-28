@@ -4,6 +4,8 @@
   "license": "GPL-2.0-only",
   "type": "library",
   "keywords": ["knet", "payment", "kuwait"],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "authors": [
     {
       "name": "hassan",
