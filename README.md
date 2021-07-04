@@ -1,5 +1,12 @@
-# knet-payment
+[![Latest Stable Version](https://img.shields.io/packagist/v/alnazer/knet-payment.svg)](https://packagist.org/packages/alnazer/knet-payment)
+[![Total Downloads](https://img.shields.io/packagist/dt/alnazer/knet-payment.svg)](https://packagist.org/packages/alnazer/knet-payment)
+[![Build Status](https://travis-ci.org/alnazer/knet-payment.svg?branch=knet-payment)](https://travis-ci.org/alnazer/knet-payment)
+[![License](https://img.shields.io/packagist/l/alnazer/knet-payment)](https://packagist.org/packages/alnazer/knet-payment)
+ 
 
+
+
+# knet-payment
 
 to test payment choose KNET from banks list (بنك اختبار كنيت [KNET1])
 ```text
