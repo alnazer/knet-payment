@@ -13,7 +13,7 @@ to test payment choose KNET from banks list (بنك اختبار كنيت [KNET1
 Card Number : 8888880000000001
 
 for Captured 
-Expiry Date : 09/21  or add currently Year 09/currently Year
+Expiry Date : 09/25
 
 for Not Captured
 Expiry Date : Any
