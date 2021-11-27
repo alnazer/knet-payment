@@ -265,5 +265,10 @@ public function afterResponce($payment_id, $trackid, $result)
   "Error" => "get from knet responce",
 ]
 ```
+## Chnagelog
+
+###version 1.0.2
+
+* fixed call array of strin gphp version 8
 
 

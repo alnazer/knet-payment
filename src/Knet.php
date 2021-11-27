@@ -368,7 +368,8 @@ class Knet
 
     private function pkcs5_unpad($text)
     {
-        $pad = ord($text{strlen($text)-1});
+        $index = strlen($text)-1;
+        $pad = ord($text[$index]);
         if ($pad > strlen($text)) {
             return false;
         }
