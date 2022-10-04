@@ -368,7 +368,7 @@ class Knet
 
     private function pkcs5_unpad($text)
     {
-        $index = strlen($text)-1;
+        $index = (strlen($text)-1);
         $pad = ord($text[$index]);
         if ($pad > strlen($text)) {
             return false;
@@ -376,7 +376,7 @@ class Knet
         if (strspn($text, chr($pad), strlen($text) - $pad) != $pad) {
             return false;
         }
-        return substr($text, 0, -1 * $pad);
+        return substr($text, 0, (-1 * $pad));
     }
     /** ======== Payment Encrypt Functions Ended ====== */
 }
