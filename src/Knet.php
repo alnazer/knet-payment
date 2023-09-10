@@ -10,6 +10,7 @@ class Knet
     public $config;
     public $erros = array();
     public $is_test = false;
+    public $is_redirection_mode = false;
     public $amount;
     public $tranportal_id = "";
     public $password = "";
@@ -33,6 +34,7 @@ class Knet
         $this->config = array_merge(
             [
                 "is_test"=>false,
+                'is_redirection_mode' => false,
                 "tranportal_id"=>"",
                 "password"=>"",
                 "resource_key"=>"",
@@ -82,33 +84,94 @@ class Knet
         //call before Responce event
         $result= [];
         $this->beforeResponce();
-        $ResErrorText   =   (isset($_REQUEST['ErrorText'])) ? $this->sanitize_field($_REQUEST['ErrorText']) : null; 	  	//Error Text/message
-        $ResPaymentId   =   (isset($_REQUEST['paymentid'])) ? $this->sanitize_field($_REQUEST['paymentid']) : null; 		//Payment Id
-        $ResTrackID     =   (isset($_REQUEST['trackid']))   ? $this->sanitize_field($_REQUEST['trackid']) : null;       	//Merchant Track ID
-        $ResErrorNo     =   (isset($_REQUEST['Error']))     ? $this->sanitize_field($_REQUEST['Error']) : null;           //Error Number
-        $ResResult      =   (isset($_REQUEST['result']))    ? $this->sanitize_field($_REQUEST['result']) : null;           //Transaction Result
-        $ResPosdate     =   (isset($_REQUEST['postdate']))  ? $this->sanitize_field($_REQUEST['postdate']) : null;         //Postdate
-        $ResTranId      =   (isset($_REQUEST['tranid']))    ? $this->sanitize_field($_REQUEST['tranid']) : null;         //Transaction ID
-        $ResAuth        =   (isset($_REQUEST['auth']))  ? $this->sanitize_field($_REQUEST['auth']) : null;               //Auth Code
-        $ResAVR         =   (isset($_REQUEST['avr']))   ? $this->sanitize_field($_REQUEST['avr']) : null;                //TRANSACTION avr
-        $ResRef         =   (isset($_REQUEST['ref']))   ? $this->sanitize_field($_REQUEST['ref']) : null;                //Reference Number also called Seq Number
-        $ResAmount      =   (isset($_REQUEST['amt']))   ? $this->sanitize_field($_REQUEST['amt']) : null;             //Transaction Amount
-        $Resudf1        =   (isset($_REQUEST['udf1']))  ? $this->sanitize_field($_REQUEST['udf1']) : null;              //UDF1
-        $Resudf2        =   (isset($_REQUEST['udf2']))  ? $this->sanitize_field($_REQUEST['udf2']) : null;               //UDF2
-        $Resudf3        =   (isset($_REQUEST['udf3']))  ? $this->sanitize_field($_REQUEST['udf3']) : null;                //UDF3
-        $Resudf4        =   (isset($_REQUEST['udf4']))  ? $this->sanitize_field($_REQUEST['udf4']) : null;    //UDF4
-        $Resudf5        =   (isset($_REQUEST['udf5']))  ? $this->sanitize_field($_REQUEST['udf5']) : null;    //UDF5
-        if($ResErrorText==null && $ResErrorNo==null && $ResPaymentId != null)
-        {
-            // success
-            $ResTranData= (isset($_REQUEST['trandata'])) ? $this->sanitize_field($_REQUEST['trandata']) : null;
-            $decrytedData=$this->decrypt($ResTranData,$this->resource_key);
-            parse_str($decrytedData, $output);
-                if($ResTranData !=null)
+
+        $result = $this->inti_response();
+        //call after Responce event
+        $this->afterResponce($result['paymentid'],$result['trackid'],$result);
+
+        return  $result;
+    }
+ 
+    public function print_redirect($redirect_url,$payment_id){
+        return "REDIRECT=".$redirect_url.'?paymentID='.$payment_id;
+    }
+    private function inti_response(){
+        $return = [];
+        if($this->is_redirection_mode === true){
+            $response_trans_data = file_get_contents('php://input');
+            if(empty($response_trans_data)){
+                $result['ErrorText']   = "There is no data sent from KNET";
+            }else{
+                    $output = $this->decryted_data($response_trans_data);
+                    if(is_array($output) && count($output) > 0){
+                            $result['status'] = 'success';
+                            $result['paymentid'] = $output['paymentid'];
+                            $result['trackid'] = $output['trackid'];
+                            $result['tranid'] = $output['tranid'];
+                            $result['ref'] = $output['ref'];
+                            $result['result'] = $output['result'];
+                            $result['postdate'] = $output['postdate'];
+                            $result['auth'] = $output['auth'];
+                            $result['avr'] = $output['avr'];                 //TRANSACTION avr
+                            $result['amount'] = $output['amt'];              //Transaction Amount
+                            $result['udf1'] = $output['udf1'];               //UDF1
+                            $result['udf2'] = $output['udf2'];               //UDF2
+                            $result['udf3'] = $output['udf3'];               //UDF3
+                            $result['udf4'] = $output['udf4'];               //UDF4
+                            $result['udf5'] = $output['udf5'];
+                            //Decryption logice starts
+                            $result['data']=$response_trans_data;
+                            $result['ErrorText']= ""; 	  	//Error
+                            $result['Error'] = "";
+                    }else{
+                        $result['status'] = "error";
+                        $result['paymentid'] = "";
+                        $result['trackid'] = "";
+                        $result['tranid'] = "";
+                        $result['ref'] = "";
+                        $result['result'] = "error";
+                        $result['data']= http_build_query($_REQUEST);
+                        $result['postdate'] = "";
+                        $result['auth'] = "";
+                        $result['avr'] = "";
+                        $result['amount'] = "";
+                        $result['udf1'] = "";
+                        $result['udf2'] = "";
+                        $result['udf3'] = "";
+                        $result['udf4'] = "";
+                        $result['udf5'] = "";
+                        $result['ErrorText']= "Some error happend";
+                        $result['Error'] = "";
+                    }
+                    
+            }
+        }else{
+            $ResErrorText   =   (isset($_REQUEST['ErrorText'])) ? $this->sanitize_field($_REQUEST['ErrorText']) : null; 	  	//Error Text/message
+            $ResPaymentId   =   (isset($_REQUEST['paymentid'])) ? $this->sanitize_field($_REQUEST['paymentid']) : null; 		//Payment Id
+            $ResTrackID     =   (isset($_REQUEST['trackid']))   ? $this->sanitize_field($_REQUEST['trackid']) : null;       	//Merchant Track ID
+            $ResErrorNo     =   (isset($_REQUEST['Error']))     ? $this->sanitize_field($_REQUEST['Error']) : null;           //Error Number
+            $ResResult      =   (isset($_REQUEST['result']))    ? $this->sanitize_field($_REQUEST['result']) : null;           //Transaction Result
+            $ResPosdate     =   (isset($_REQUEST['postdate']))  ? $this->sanitize_field($_REQUEST['postdate']) : null;         //Postdate
+            $ResTranId      =   (isset($_REQUEST['tranid']))    ? $this->sanitize_field($_REQUEST['tranid']) : null;         //Transaction ID
+            $ResAuth        =   (isset($_REQUEST['auth']))  ? $this->sanitize_field($_REQUEST['auth']) : null;               //Auth Code
+            $ResAVR         =   (isset($_REQUEST['avr']))   ? $this->sanitize_field($_REQUEST['avr']) : null;                //TRANSACTION avr
+            $ResRef         =   (isset($_REQUEST['ref']))   ? $this->sanitize_field($_REQUEST['ref']) : null;                //Reference Number also called Seq Number
+            $ResAmount      =   (isset($_REQUEST['amt']))   ? $this->sanitize_field($_REQUEST['amt']) : null;             //Transaction Amount
+            $Resudf1        =   (isset($_REQUEST['udf1']))  ? $this->sanitize_field($_REQUEST['udf1']) : null;              //UDF1
+            $Resudf2        =   (isset($_REQUEST['udf2']))  ? $this->sanitize_field($_REQUEST['udf2']) : null;               //UDF2
+            $Resudf3        =   (isset($_REQUEST['udf3']))  ? $this->sanitize_field($_REQUEST['udf3']) : null;                //UDF3
+            $Resudf4        =   (isset($_REQUEST['udf4']))  ? $this->sanitize_field($_REQUEST['udf4']) : null;    //UDF4
+            $Resudf5        =   (isset($_REQUEST['udf5']))  ? $this->sanitize_field($_REQUEST['udf5']) : null;    //UDF5
+            if($ResErrorText==null && $ResErrorNo==null && $ResPaymentId != null)
+            {
+                // success
+                $ResTranData = (isset($_REQUEST['trandata'])) ? $this->sanitize_field($_REQUEST['trandata']) : null;
+                $output = $this->decryted_data($ResTranData);
+                if($ResTranData !=null && is_array($output))
                 {
                     $result['status'] = 'success';
-                    $result['paymentid'] = $ResPaymentId;
-                    $result['trackid'] = $ResTrackID;
+                    $result['paymentid'] = $output['paymentid'];
+                    $result['trackid'] = $output['trackid'];
                     $result['tranid'] = $output['tranid'];
                     $result['ref'] = $output['ref'];
                     $result['result'] = $output['result'];
@@ -145,7 +208,6 @@ class Knet
                     $result['ErrorText']= $ResErrorText; 	  	//Error
                     $result['Error'] = $ResErrorNo;
                 }
-
             }
             else
             {
@@ -169,13 +231,14 @@ class Knet
                 $result['ErrorText']= $ResErrorText;
                 $result['Error'] = $ResErrorNo;
             }
-
-            //call after Responce event
-            $this->afterResponce($result['paymentid'],$result['trackid'],$result);
-
-        return  $result;
+        }
+        return $return;
     }
-
+    private function decryted_data($data){
+        $decrytedData = $this->decrypt($data,$this->resource_key);
+        parse_str($decrytedData, $output);
+        return $output;
+    }
     /** return validate
      * @return bool
      */

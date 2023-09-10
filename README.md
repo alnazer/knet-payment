@@ -69,6 +69,36 @@ else
     // print error $resutl["ErrorText"]
 }
 ```
+
+### For user Register after 4/9/2023
+if you register after 4/9/2023 and want active KNET new policy set this active
+```php
+$is_redirection_mode = true;
+```
+to return redirect page using this function
+```php
+//$redirect_url the link will redirect (your order page or confiremed payment)
+//$payment_id : payment id return from KNET
+print_redirect($redirect_url,$payment_id);
+```
+
+```php
+// ************** back from knet  *************//
+
+$resutl = $knet->responce();
+
+if($resutl["status"] == "success"){
+  // get reult and update your database
+  echo $knet->print_redirect("The page url will redirect to it",$resutl["paymentid"]);
+}
+else
+{
+
+  // get reult and update your database
+  echo $knet->print_redirect("The error page url will redirect to it",$resutl["paymentid"]);
+}
+```
+
 ### require information
 get this information knet account
 ```php
@@ -80,6 +110,8 @@ if you want test payment
 ```php
 $is_test = true;
 ```
+
+
 ### return urls
 ```php
 $response_url; // url bank will return after payment operation success
@@ -267,8 +299,12 @@ public function afterResponce($payment_id, $trackid, $result)
 ```
 ## Chnagelog
 
+###version 1.1.0
+
+* active redirection mode for KNET new policy
+
 ###version 1.0.2
 
-* fixed call array of strin gphp version 8
+* fixed call array of string php version 8
 
 
