@@ -78,7 +78,7 @@ $is_redirection_mode = true;
 to return redirect page using this function
 ```php
 //$redirect_url the link will redirect (your order page or confiremed payment)
-//$payment_id : payment id restrun from KNET
+//$payment_id : payment id return from KNET
 print_redirect($redirect_url,$payment_id);
 ```
 
