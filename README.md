@@ -80,7 +80,9 @@ to return redirect page using this function
 //$redirect_url the link will redirect (your order page or confiremed payment)
 //$payment_id : payment id restrun from KNET
 print_redirect($redirect_url,$payment_id);
+```
 
+```php
 // ************** back from knet  *************//
 
 $resutl = $knet->responce();
