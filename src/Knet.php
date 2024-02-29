@@ -96,7 +96,7 @@ class Knet
         return "REDIRECT=".$redirect_url.'?paymentID='.$payment_id;
     }
     private function inti_response(){
-        $return = [];
+        $result = [];
         if($this->is_redirection_mode === true){
             $response_trans_data = file_get_contents('php://input');
             if(empty($response_trans_data)){
@@ -107,7 +107,7 @@ class Knet
                             $result['status'] = 'success';
                             $result['paymentid'] = $output['paymentid'];
                             $result['trackid'] = $output['trackid'];
-                            $result['tranid'] = $output['tranid'];
+                            $result['tranid'] = $output['tranid'] ?? "";
                             $result['ref'] = $output['ref'];
                             $result['result'] = $output['result'];
                             $result['postdate'] = $output['postdate'];
@@ -172,7 +172,7 @@ class Knet
                     $result['status'] = 'success';
                     $result['paymentid'] = $output['paymentid'];
                     $result['trackid'] = $output['trackid'];
-                    $result['tranid'] = $output['tranid'];
+                    $result['tranid'] = $output['tranid']  ?? "";
                     $result['ref'] = $output['ref'];
                     $result['result'] = $output['result'];
                     $result['postdate'] = $output['postdate'];
@@ -185,14 +185,14 @@ class Knet
                     $result['udf4'] = $output['udf4'];               //UDF4
                     $result['udf5'] = $output['udf5'];
                     //Decryption logice starts
-                    $result['data']=$decrytedData;
+                    $result['data']=$ResTranData;
                     $result['ErrorText']= $ResErrorText; 	  	//Error
                     $result['Error'] = $ResErrorNo;
                 }else{
                     $result['status'] = 'error';
                     $result['paymentid'] = $ResPaymentId;
                     $result['trackid'] = $ResTrackID;
-                    $result['tranid'] = $ResTranId;
+                    $result['tranid'] = $ResTranId  ?? "";
                     $result['ref'] = $ResRef;
                     $result['result'] =  'error';
                     $result['data']= http_build_query($_REQUEST);
@@ -215,7 +215,7 @@ class Knet
                 $result['status'] = "error";
                 $result['paymentid'] = $ResPaymentId;
                 $result['trackid'] = $ResTrackID;
-                $result['tranid'] = $ResTranId;
+                $result['tranid'] = $ResTranId  ?? "";
                 $result['ref'] = $ResRef;
                 $result['result'] = "error";
                 $result['data']= http_build_query($_REQUEST);
@@ -232,7 +232,7 @@ class Knet
                 $result['Error'] = $ResErrorNo;
             }
         }
-        return $return;
+        return $result;
     }
     private function decryted_data($data){
         $decrytedData = $this->decrypt($data,$this->resource_key);
